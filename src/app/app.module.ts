@@ -9,6 +9,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { UserComponent } from './user/user-list.component';
 import { PolicyComponent } from './policy/policy.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './service/auth.guard'
 
 @NgModule({
   declarations: [
@@ -27,17 +28,17 @@ import { LoginComponent } from './login/login.component';
       {
         path: 'users',
         component: UserComponent,
-        canActivate: [AuthGuardService]
+        canActivate: [AuthGuard]
       },
       {
         path: 'users/:id',
         component: PolicyComponent,
-        canActivate: [AuthGuardService]
+        canActivate: [AuthGuard]
       },
       {
         path: 'welcome',
         component: WelcomeComponent,
-        canActivate: [AuthGuardService]
+        canActivate: [AuthGuard]
       },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
