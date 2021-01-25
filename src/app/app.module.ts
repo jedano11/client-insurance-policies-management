@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { UserComponent } from './user/user-list.component';
@@ -25,14 +24,26 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
-      { path: 'users', component: UserComponent },
-      { path: 'users/:id', component: PolicyComponent },
-      { path: 'welcome', component: WelcomeComponent },
+      {
+        path: 'users',
+        component: UserComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'users/:id',
+        component: PolicyComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'welcome',
+        component: WelcomeComponent,
+        canActivate: [AuthGuardService]
+      },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
-    ]),
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
