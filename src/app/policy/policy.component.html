@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header">{{ pageTitle }}</div>
+    <div class="table-responsive" *ngIf="policies && policies.length">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Amount Insured</th>
+                    <th>Agent Email</th>
+                    <th>Inception Date</th>
+                    <th>Installment Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let policy of policies">
+                    <td>{{ policy.amountInsured | currency: "USD":"symbol":"1.2-2" }}</td>
+                    <td>{{ policy.email }}</td>
+                    <td>{{ policy.inceptionDate | date: "medium" }}</td>
+                    <td>
+                        {{ policy.installmentPayment }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
