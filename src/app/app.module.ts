@@ -1,50 +1,40 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { AuthGuard } from './_helpers';
 
 import { AppComponent } from './app.component';
-import { WelcomeComponent } from './home/welcome.component';
-import { UserComponent } from './user/user-list.component';
-import { PolicyComponent } from './policy/policy.component';
-import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './service/auth.guard'
+
+import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
+import { UserComponent } from './user';
+import { PolicyComponent } from './policy';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserComponent,
-    WelcomeComponent,
-    PolicyComponent,
-    LoginComponent
-  ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
-      { path: 'login', component: LoginComponent },
-      {
-        path: 'users',
-        component: UserComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'users/:id',
-        component: PolicyComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'welcome',
-        component: WelcomeComponent,
-        canActivate: [AuthGuard]
-      },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+      {path: 'login', component: LoginComponent},
+      { path: 'clients', component: UserComponent,  canActivate: [AuthGuard]},
+      { path: 'clients/:id', component: PolicyComponent,  canActivate: [AuthGuard]},
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  declarations: [AppComponent, HomeComponent, LoginComponent, UserComponent, PolicyComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

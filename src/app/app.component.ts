@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-root',
-  template: `
-    <nav class='navbar navbar-expand navbar-light bg-light'>
-        <a class='navbar-brand'>{{title}}</a>
-        <ul class='nav nav-pills'>
-          <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/welcome']">Home</a></li>
-          <li><a class='nav-link' routerLinkActive='active' [routerLink]="['/users']">User List</a></li>
-        </ul>
-    </nav>
-    <div class='container'>
-      <router-outlet></router-outlet>
-    </div>
-    `,
-})
-export class AppComponent {
-  title = 'Client Insurance Policies Management';
+import { AuthenticationService } from './_services';
+import { IUser } from './_models';
+
+@Component({ selector: 'app-root', templateUrl: 'app.component.html' })
+export class AppComponent implements OnInit {
+  user: IUser = { id: '', name: '', email: '', role: '' };
+
+  constructor(private authenticationService: AuthenticationService) {}
+
+  ngOnInit() {
+    this.authenticationService.user.subscribe(x => (this.user = x));
+  }
+
+  logout() {
+    this.authenticationService.logout();
+  }
 }
