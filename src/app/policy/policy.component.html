@@ -1,0 +1,56 @@
+<div class="card policy-container">
+    <div class="card-header">{{ pageTitle }}</div>
+    <div class="card-body">
+        <div class="text-center m-5" *ngIf="loading">
+            <div class="spinner-border text-warning" role="status"></div>
+        </div>
+        <div class="text-center m-5" *ngIf="policies && !policies.length && !loading">
+            <figure class="text-center">
+                <blockquote class="blockquote">
+                    <p>
+                        This user has no insurance policy!
+                    </p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    Select other <cite title="Source Title">User</cite>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="table-responsive" *ngIf="policies && policies.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Amount Insured</th>
+                        <th>Agent Email</th>
+                        <th>Inception Date</th>
+                        <th>Installment Payment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="
+              let policy of policies
+                | paginate: { itemsPerPage: 12, currentPage: p }
+            ">
+                        <td>
+                            {{ policy.amountInsured | currency: "USD":"symbol":"1.2-2" }}
+                        </td>
+                        <td>{{ policy.email }}</td>
+                        <td>{{ policy.inceptionDate | date: "medium" }}</td>
+                        <td>
+                            {{ policy.installmentPayment }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container" *ngIf="policies && policies.length">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-6">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

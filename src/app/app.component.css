@@ -1,0 +1,14 @@
+.main-nav {
+    justify-content: flex-start;
+}
+
+.clients,
+.logout {
+    font-size: 20px;
+}
+
+.logout {
+    color: rgb(78, 76, 76);
+    flex: 1;
+    text-align: right;
+}
