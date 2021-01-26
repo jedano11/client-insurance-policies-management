@@ -4,7 +4,7 @@
             <img src="../assets/logo.png" alt="" width="35" height="30" class="d-inline-block align-top"> Client Insurance Policies Management
         </a>
         <a *ngIf="user.email" class="nav-item nav-link clients" routerLink="/clients">Clients</a>
-        <a *ngIf="user.email" class="nav-item nav-link logout" (click)="logout()">Logout</a>
+        <a *ngIf="user.email" class="nav-item nav-link logout" (click)="logout()">Logout  <fa-icon [icon]="faSignOut"></fa-icon></a>
     </div>
 </nav>
 

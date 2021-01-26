@@ -4,12 +4,15 @@ import { IUser } from '../_models/index'
 
 @Component({
   templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
 export class UserComponent implements OnInit {
-  pageTitle: string = 'User List';
+  pageTitle: string = 'Client List';
   filteredUsers: IUser[] = [];
   users: IUser[] = [];
   errorMessage: string = '';
+  p: number = 1;
+  loading: boolean = false;
 
   _listFilter: string = '';
   get listFilter(): string {
@@ -33,10 +36,12 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.userService.getUsers().subscribe({
       next: users => {
         this.users = users.clients;
         this.filteredUsers = this.users;
+        this.loading = false;
       },
       error: error => (this.errorMessage = error)
     });

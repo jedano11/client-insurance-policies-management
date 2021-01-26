@@ -8,12 +8,11 @@
 
 .text-logo {
     overflow-wrap: break-word;
-    width: 350px;
+    width: 400px;
     display: inline-block;
     text-align: left;
     margin-left: 20px;
     line-height: 50px;
-    font-family: cursive;
 }
 
 .card-form {
@@ -28,7 +27,7 @@
 
 .card-form input:focus {
     border-color: #f6c70c;
-    box-shadow: 0 0 0 0.2rem #f3d768;
+    box-shadow: 0 0 0 0.1rem #f3d768;
 }
 
 .card-form button {

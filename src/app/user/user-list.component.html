@@ -1,20 +1,32 @@
-<div class="card">
+<div class="card users-container">
     <div class="card-header">{{ pageTitle }}</div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-2">Filter by:</div>
-            <div class="col-md-4">
-                <input type="text" [(ngModel)]='listFilter' />
+            <div class="col-md-1">Filter:</div>
+            <div class="col-md-5">
+                <input type="text" [(ngModel)]="listFilter" placeholder="Name" />
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Filtered by: {{listFilter}}</h4>
+        <div class="row loader-container" *ngIf="loading">
+            <div class="text-center">
+                <div class="spinner-border text-warning m-5" role="status"></div>
             </div>
+        </div>
+        <div class="text-center m-5" *ngIf=" listFilter && filteredUsers && !filteredUsers.length && !loading">
+            <figure class="text-center">
+                <blockquote class="blockquote">
+                    <p>
+                        No user found with {{ listFilter }} filter!!
+                    </p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    Input other <cite title="Source Title">Name</cite>
+                </figcaption>
+            </figure>
         </div>
     </div>
-    <div class="table-responsive" *ngIf="users && users.length">
-        <table class="table">
+    <div class="table-responsive" *ngIf="filteredUsers && filteredUsers.length">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -23,14 +35,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of filteredUsers">
+                <tr *ngFor="
+            let user of filteredUsers
+              | paginate: { itemsPerPage: 12, currentPage: p }
+          ">
                     <td>
                         <a [routerLink]="['/clients', user.id]">{{ user.name }}</a>
                     </td>
-                    <td>{{ user.email}}</td>
+                    <td>{{ user.email }}</td>
                     <td>{{ user.role }}</td>
                 </tr>
             </tbody>
         </table>
+        <div class="container" *ngIf="filteredUsers && filteredUsers.length">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
     </div>
 </div>
