@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './user.service';
-import { IUser } from './user'
+import { UserService } from '../_services/user.service';
+import { IUser } from '../_models/index'
 
 @Component({
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
 })
 export class UserComponent implements OnInit {
   pageTitle: string = 'User List';

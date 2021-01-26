@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { PolicyService } from './policy.service';
-import { IPolicy } from './policy';
+import { PolicyService } from '../_services';
+import { IPolicy } from '../_models';
 
 @Component({
   templateUrl: './policy.component.html',
-  styleUrls: ['./policy.component.css']
 })
 export class PolicyComponent implements OnInit {
   pageTitle: string = 'Policy List';
