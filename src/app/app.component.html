@@ -1,10 +1,10 @@
 <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+    <div class="container-fluid main-nav">
+        <a class="navbar-brand logo" href="/home">
             <img src="../assets/logo.png" alt="" width="35" height="30" class="d-inline-block align-top"> Client Insurance Policies Management
         </a>
-        <a *ngIf="user.email" class="nav-item nav-link" routerLink="/clients">Clients</a>
-        <a *ngIf="user.email" class="nav-item nav-link" (click)="logout()">Logout</a>
+        <a *ngIf="user.email" class="nav-item nav-link clients" routerLink="/clients">Clients</a>
+        <a *ngIf="user.email" class="nav-item nav-link logout" (click)="logout()">Logout</a>
     </div>
 </nav>
 
