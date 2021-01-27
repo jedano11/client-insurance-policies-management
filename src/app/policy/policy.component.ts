@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { PolicyService } from '../_services';
 import { IPolicy } from '../_models';
@@ -14,6 +15,9 @@ export class PolicyComponent implements OnInit {
   errorMessage: string = '';
   p: number = 1;
   loading: boolean = false;
+  faCheck = faCheck;
+  faTimes = faTimes;
+  
 
   constructor(
     private route: ActivatedRoute,

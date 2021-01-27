@@ -17,7 +17,7 @@
             </figure>
         </div>
         <div class="table-responsive" *ngIf="policies && policies.length">
-            <table class="table">
+            <table class="table table-striped policy-table">
                 <thead>
                     <tr>
                         <th>Amount Insured</th>
@@ -36,8 +36,9 @@
                         </td>
                         <td>{{ policy.email }}</td>
                         <td>{{ policy.inceptionDate | date: "medium" }}</td>
-                        <td>
-                            {{ policy.installmentPayment }}
+                        <td class="installment-payment">
+                            <fa-icon *ngIf='policy.installmentPayment' [icon]="faCheck"></fa-icon>
+                            <fa-icon *ngIf='!policy.installmentPayment' [icon]="faTimes"></fa-icon>
                         </td>
                     </tr>
                 </tbody>
